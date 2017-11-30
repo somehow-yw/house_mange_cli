@@ -1,13 +1,12 @@
-# house_mange_cli
+# house_mange_cli(房产信息管理系统-前端页面)
 
-> it is created by hjw
+> 此项目的设计开发者：胡津伟  成都东软学院 2018年毕业设计
 
-## Build Setup
+## 项目启动
 
 ``` bash
 # install dependencies
 npm install
-
 # serve with hot reload at localhost:8080
 npm run dev
 
@@ -18,5 +17,14 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-# house_mange_cli
+## 前端页面采用的技术
+- MVVM开发模式
+- VUE 2.0
+- iVivw
+- VUEX
+- Axios
+- VUE-ROUTER
+- Webpack打包工具
+- HTML
+- CSS
+- JavaScript
