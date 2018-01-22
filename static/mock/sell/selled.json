@@ -1,0 +1,57 @@
+{
+    "code": 0,
+    "message": "ok",
+    "data": [
+        {
+            "name": "新加坡花园1",
+            "time": "2017-11-12",
+            "type": "套三",
+            "address": "创业路49号",
+            "per": "1400",
+            "area": 23,
+            "trans": "一号线桐梓林地铁站",
+            "num": 12,
+            "pay":2,
+            "require": "限女生",
+            "people": "李晓琪",
+            "time_length": "6个月",
+            "money": 2300,
+            "worker": "李光友",
+            "sell_time": "2017-12-30"
+        },
+        {
+            "name": "新加坡花园2",
+            "time": "2017-11-22",
+            "address": "创业路4号",
+            "trans": "一号线桐梓林地铁站",
+            "per": "1600",
+            "area": 24,
+            "type": "套二",
+            "pay": 2.3,
+            "num": 13,
+            "require": "限女生",
+            "people": "李琪",
+            "time_length": "4个月",
+            "money": 2300,
+            "worker": "李光友",
+            "sell_time": "2017-12-30"
+        },
+        {
+            "name": "新加坡花园5",
+            "address": "创业路19号",
+            "trans": "一号线桐梓林地铁站",
+            "per": "1200",
+            "type": "套一",
+            "area": 19,
+            "pay": 2.3,
+            "require": "限女生",
+            "time": "2017-11-02",
+            "num": 20,
+            "people": "李晓琪",
+            "time_length": "6个月",
+            "money": 2300,
+            "worker": "李光友",
+            "sell_time": "2017-12-30"
+        }
+    ]
+}

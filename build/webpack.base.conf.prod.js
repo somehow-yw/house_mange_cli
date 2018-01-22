@@ -9,9 +9,8 @@ function resolve (dir) {
 }
 
 module.exports = {
-  context: path.resolve(__dirname, '../'),
   entry: {
-    app: ['./src/request/request.js', './src/main.js']
+    app: ['./src/request/request.pro.js', './src/main.js']
   },
   output: {
     path: config.build.assetsRoot,
@@ -29,16 +28,15 @@ module.exports = {
   },
   module: {
     rules: [
-      ...(config.dev.useEslint? [{
+      {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
         include: [resolve('src'), resolve('test')],
         options: {
-          formatter: require('eslint-friendly-formatter'),
-          emitWarning: !config.dev.showEslintErrorsInOverlay
+          formatter: require('eslint-friendly-formatter')
         }
-      }] : []),
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
