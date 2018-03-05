@@ -37,5 +37,8 @@
   req.getSell = function (obj, data, callback) {
     return send(obj, 'get', '/static/mock/sell/selled.json', data, callback, 'Accept:application/json')
   }
+  req.userRigister = function(obj, data, callback) {
+    return send(obj, 'post', 'http://localhost:3000/user/data', data, callback, 'Accept:application/json') 
+  }
   window.req = req
 })()

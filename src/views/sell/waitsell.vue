@@ -1,108 +1,67 @@
 <template>
-  <div class="index">
-    <Row>
-        <Col span="6" >
-            <div id="pieBar"></div>
-        </Col>
-        <Col span="18" >
-            <div id="waitrent"></div>
+  <div class="rented">
+    <Row :gutter="16">
+        <Col  span="20" >
+             <Card style="width:100%">
+               <h3>东软集团-已售套房</h3>
+                <Table :columns="columns" border :data="table_data"></Table>
+                 <Page :current="current" :total="total" simple></Page>
+             </Card>
         </Col>
     </Row>
   </div>
 </template>
 
 <script>
-var echarts = require('echarts')
+import expandRow from './waitsell-row.vue'
 export default {
-  name: 'index',
+  name: 'waisell',
+  components: { expandRow},
   data () {
     return {
-      data: null,
-      xData: [],
-      yData: [],
-      pieYdata: [],
-      color: '#b47175'
+      columns: [
+        {
+          type: 'expand',
+          width: 50,
+          render: (h, params) => {
+            return h(expandRow, {
+              props: {
+                row: params.row
+              }
+            })
+          }
+        },
+        {
+          type: 'index',
+          width: 60
+        },
+        {
+          title: '小区名字',
+          key: 'name'
+        },
+        {
+          title: '出售时间',
+          key: 'sell_time'
+        },
+        {
+          title: '户型',
+          key: 'type'
+        },
+        {
+          title: '地址',
+          key: 'address'
+        }
+      ],
+      table_data: [],
+      current: 1,
+      total: 20
     }
   },
   methods: {
-    initData () {
-      for (var item of this.data) {
-        this.xData.push(item.name)
-        this.yData.push(item.num)
-        var obj = {value: item.num, name: item.name}
-        this.pieYdata.push(obj)
-      }
-      this.initChart()
-      this.initPie()
-    },
-    initChart () {
-      var myChart = echarts.init(document.getElementById('waitrent'))
-      myChart.setOption({
-        color: [this.color],
-        title: {
-          text: '东软集团-待租套房',
-          x: 'center',
-          textStyle: {
-            color: this.color
-          }
-        },
-        tooltip: {},
-        xAxis: {
-          data: this.xData,
-          name: '数量'
-        },
-        yAxis: {
-          name: '数量'
-        },
-        series: [{
-          name: '数量',
-          type: 'line',
-          data: this.pieYdata
-        }]
-      })
-    },
-    initPie () {
-      var pieBar = echarts.init(document.getElementById('pieBar'))
-      pieBar.setOption({
-        title: {
-          text: '东软集团-待租套房',
-          x: 'center',
-          textStyle: {
-            color: '#b47175'
-          }
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: this.xData
-        },
-        series: [
-          {
-            name: '小区名字',
-            type: 'pie',
-            radius: '55%',
-            center: ['50%', '60%'],
-            data: this.pieYdata,
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
-          }
-        ]
-      })
-    },
     getData () {
-      window.req.getWaitRent(this, {}, res => {
+      window.req.getSell(this, {}, res => {
         if (res.code === 0) {
-          this.data = res.data
-          this.initData()
+          this.table_data = res.data
         }
       })
     }

@@ -55,6 +55,26 @@ export default new Router({
       path: '/addsingle',
       name: 'addsingle',
       component: _import('add/addsingle')
+    },
+    {
+      path: '/copy',
+      name: 'copy',
+      component: _import('copy/copy')
+    },
+    {
+      path: '/dis',
+      name: 'dis',
+      component: _import('dis/dis')
+    },
+    {
+      path: '/setting',
+      name: 'setting',
+      component: _import('setting/setting')
+    },
+    {
+      path: '/member',
+      name: 'member',
+      component: _import('member/member')
     }
   ]
 })

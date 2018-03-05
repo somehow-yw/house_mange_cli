@@ -14,7 +14,7 @@
         </div>
         <div class="layout-body" v-if="login">
             <Row>
-                <Col span="3">
+                <Col span="3" class="leftmenu">
                   <Menu :theme="theme2" active-name="1-1">
                     <Submenu name="1">
                         <template slot="title">
@@ -56,21 +56,21 @@
                             <Icon type="ios-pie"></Icon>
                             图表
                         </template>
-                        <router-link to="/member" ><MenuItem name="5-1">房产分布</MenuItem></router-link>
+                        <router-link to="/dis" ><MenuItem name="5-1">房产分布</MenuItem></router-link>
                     </Submenu>
                     <Submenu name="6">
                         <template slot="title">
                             <Icon type="gear-a"></Icon>
                             设置
                         </template>
-                        <router-link to="/member" ><MenuItem name="6-1">个人设置</MenuItem></router-link>
+                        <router-link to="/setting" ><MenuItem name="6-1">个人设置</MenuItem></router-link>
                     </Submenu>
                     <Submenu name="7">
                         <template slot="title">
                             <Icon type="ios-paper"></Icon>
                             说明
                         </template>
-                        <router-link to="/member" ><MenuItem name="7-1">版权说明</MenuItem></router-link>
+                        <router-link to="/copy" ><MenuItem name="7-1">版权说明</MenuItem></router-link>
                     </Submenu>
                   </Menu>
                 </Col>
@@ -93,7 +93,8 @@
                     </FormItem>
                     <FormItem>
                         <Button type="primary" @click="handleSubmit('formCustom')">登录</Button>
-                        <Button type="ghost" @click="registerAccount = false;" style="margin-left: 8px">去注册</Button>
+                        <Button type="primary" @click="testdata">登22录</Button>
+                        <Button type="ghost" @click="registerAccount = false;formCustom={}" style="margin-left: 8px">去注册</Button>
                     </FormItem>
                 </Form>
             </template>
@@ -118,6 +119,7 @@
 </template>
 
 <script>
+let CryptoJS = require('crypto-js')
 export default {
   name: 'app',
   data () {
@@ -144,7 +146,7 @@ export default {
       }
     }
     return {
-      login: true,
+      login: false,
       theme2: 'light',
       registerAccount: true,
       data: {},
@@ -164,7 +166,9 @@ export default {
   },
   methods: {
     handleSubmit (name) {
-      window.req.getUserInfo(this, {}, (res) => {
+        // mmd5 加密
+      var params = {user: this.formCustom.user, pwd: CryptoJS.MD5(this.formCustom.passwd, { asString: true}).toString()}
+      window.req.getUserInfo(this, params, (res) => {
         if (res.code === 0) {
           this.login = true
           this.data = res.data
@@ -172,11 +176,32 @@ export default {
       })
     },
     reginster () { // 注册用户
-      this.$Message.success('注册成功!请前往登录吧')
       var vm = this
+      this.$Message.success('注册成功!请前往登录吧');
+      var params = {user: this.formCustom.user, pwd: CryptoJS.MD5(this.formCustom.passwd, { asString: true}).toString()}
+      window.req.getUserInfo(this, params, (res) => {
+        if (res.code === 0) {
+          this.login = true
+          this.data = res.data
+        }
+      })
       setTimeout(function () {
         vm.registerAccount = true
       }, 1000)
+    },
+    testdata () {
+        let params = {
+            user: 'qwe',
+            password: '234',
+            date: '2012-11-11'
+        }
+        window.req.userRigister(this, params, (res) => {
+            console.log('res', res)
+        if (res.code === 0) {
+          this.login = true
+          this.data = res.data
+        }
+      })
     }
   }
 }
@@ -202,6 +227,9 @@ a {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   border-color: #f5f5f5;
+  .leftmenu:first-child ul {
+      width: 100%!important;
+  }
 }
 .ivu-row{
     width: 100%;
@@ -249,8 +277,8 @@ a {
         border-radius: 3px;
         float: left;
         position: relative;
-        top: 15px;
-        left: 18px;
+        top: 1%;
+        left: 0px;
         background-image: url('./assets/houselogo.png');
         background-size: cover;
 

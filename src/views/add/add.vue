@@ -3,49 +3,49 @@
         <Col span="15" offset="2">
              <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
                 <FormItem label="小区名字" prop="name">
-                    <Input v-model="formValidate.name" placeholder="Enter your name"></Input>
+                    <Input v-model="formValidate.name" placeholder="请输入小区名字"></Input>
                 </FormItem>
-                <FormItem label="小区地址" prop="mail">
-                    <Input v-model="formValidate.mail" placeholder="Enter your e-mail"></Input>
+                <FormItem label="小区地址" prop="address">
+                    <Input v-model="formValidate.address" placeholder="请输入小区地址"></Input>
                 </FormItem>
-                <FormItem label="类型" prop="city">
-                    <Select v-model="formValidate.city" placeholder="Select your city">
+                <FormItem label="类型" prop="type">
+                    <Select v-model="formValidate.type" placeholder="请选择房屋类型">
                         <Option value="商住楼">商住楼</Option>
                         <Option value="商品房">商品房</Option>
                         <Option value="别墅">别墅</Option>
                     </Select>
                 </FormItem>
-                <FormItem label="Date">
+                <FormItem label="日期">
                     <Row>
                         <Col span="11">
                             <FormItem prop="date">
-                                <DatePicker type="date" placeholder="Select date" v-model="formValidate.date"></DatePicker>
+                                <DatePicker type="date" placeholder="选择日期" v-model="formValidate.date"></DatePicker>
                             </FormItem>
                         </Col>
                         <Col span="2" style="text-align: center">-</Col>
                         <Col span="11">
                             <FormItem prop="time">
-                                <TimePicker type="time" placeholder="Select time" v-model="formValidate.time"></TimePicker>
+                                <TimePicker type="time" placeholder="选择时间" v-model="formValidate.time"></TimePicker>
                             </FormItem>
                         </Col>
                     </Row>
                 </FormItem>
-                <FormItem label="Gender" prop="gender">
-                    <RadioGroup v-model="formValidate.gender">
-                        <Radio label="male">Male</Radio>
-                        <Radio label="female">Female</Radio>
+                <FormItem label="贷款" prop="credit">
+                    <RadioGroup v-model="formValidate.credit">
+                        <Radio label="yes">有</Radio>
+                        <Radio label="no">无</Radio>
                     </RadioGroup>
                 </FormItem>
-                <FormItem label="Hobby" prop="interest">
-                    <CheckboxGroup v-model="formValidate.interest">
-                        <Checkbox label="Eat"></Checkbox>
-                        <Checkbox label="Sleep"></Checkbox>
-                        <Checkbox label="Run"></Checkbox>
-                        <Checkbox label="Movie"></Checkbox>
+                <FormItem label="优势" prop="advantage">
+                    <CheckboxGroup v-model="formValidate.advantage">
+                        <Checkbox label="近一号线"></Checkbox>
+                        <Checkbox label="高档小区"></Checkbox>
+                        <Checkbox label="安静"></Checkbox>
+                        <Checkbox label="健身房"></Checkbox>
                     </CheckboxGroup>
                 </FormItem>
-                <FormItem label="Desc" prop="desc">
-                    <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                <FormItem label="备注" prop="remark">
+                    <Input v-model="formValidate.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="还有什么需要告知的呢"></Input>
                 </FormItem>
                 <FormItem>
                     <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
@@ -62,41 +62,40 @@
             return {
                 formValidate: {
                     name: '',
-                    mail: '',
-                    city: '',
-                    gender: '',
-                    interest: [],
+                    address: '',
+                    type: '',
+                    credit: '',
+                    advantage: [],
                     date: '',
                     time: '',
-                    desc: ''
+                    remark: ''
                 },
                 ruleValidate: {
                     name: [
                         { required: true, message: '请输入小区名字', trigger: 'blur' }
                     ],
-                    mail: [
-                        { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-                        { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+                    address: [
+                        { required: true, message: '请输入小区地址', trigger: 'blur' }
                     ],
-                    city: [
-                        { required: true, message: 'Please select the city', trigger: 'change' }
+                    type: [
+                        { required: true, message: '请选择房屋类型', trigger: 'change' }
                     ],
-                    gender: [
-                        { required: true, message: 'Please select gender', trigger: 'change' }
+                    credit: [
+                        { required: true, message: '请选择是否贷款', trigger: 'change' }
                     ],
-                    interest: [
-                        { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-                        { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
+                    advantage: [
+                        { required: true, type: 'array', min: 1, message: '说说房屋的优点吧', trigger: 'change' },
+                        { type: 'array', max: 2, message: '至少选择两个吧', trigger: 'change' }
                     ],
                     date: [
-                        { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
+                        { required: true, type: 'date', message: '请选择录入的日期', trigger: 'change' }
                     ],
                     time: [
-                        { required: true, type: 'date', message: 'Please select time', trigger: 'change' }
+                        { required: true, type: 'date', message: '请选择录入的时间', trigger: 'change' }
                     ],
-                    desc: [
-                        { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-                        { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
+                    remark: [
+                        { required: true, message: '备注', trigger: 'blur' },
+                        { type: 'string', min: 0, message: '', trigger: 'blur' }
                     ]
                 }
             }
